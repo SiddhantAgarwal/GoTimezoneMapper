@@ -19,16 +19,19 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     - name: Install Go
       if: success()
       uses: actions/setup-go@v2
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Calc coverage 
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin   
-        go test -v -covermode=count -coverprofile=coverage.out
+      run: export PATH=$PATH:$(go env GOPATH)/bin   
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        coverageCommand: go test -v -covermode=count -coverprofile=coverage.out
+        debug: true
 
     # Runs a set of commands using the runners shell.
