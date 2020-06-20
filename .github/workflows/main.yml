@@ -22,9 +22,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Code Coverage
+      run: go test -cover
       env:
         CC_TEST_REPORTER_ID: c3b23c5899d48eac138b8aa938828ef18e6cabd6fdfc584c7680a9b9a9d0bf18
-      with:
-       coverageCommand: go test -cover
-
     # Runs a set of commands using the runners shell.
