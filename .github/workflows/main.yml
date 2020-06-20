@@ -27,11 +27,14 @@ jobs:
     - name: Calc coverage 
       run: export PATH=$PATH:$(go env GOPATH)/bin   
     - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v2.6.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
-        coverageCommand: go test -v -covermode=count -coverprofile=coverage.out
-        debug: true
+      run: |
+         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+         chmod +x ./cc-test-reporter
+         ./cc-test-reporter before-build
+         go test -v -covermode=count -coverprofile=coverage.out
+      if: success()
+         ./cc-test-reporter after-build
 
     # Runs a set of commands using the runners shell.
