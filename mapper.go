@@ -21,7 +21,7 @@ func init() {
 		}
 
 		if err != nil {
-			log.Fatal(err)
+			log.Println("[GoTimeZoneMapper.init] Failed to parse country to timzone mapping")
 		}
 
 		zoneMap[record[2]] = record[1]
@@ -34,7 +34,7 @@ func FindCountryCodeForTimezone(timezone string) (string, error) {
 	var found bool
 
 	if countryCode, found = zoneMap[timezone]; !found {
-		return "", fmt.Errorf("Country-Code not found for %s", timezone)
+		return "", fmt.Errorf("[GoTimeZoneMapper.FindCountryCodeForTimezone] Country-Code not found for %s", timezone)
 	}
 
 	return countryCode, nil
