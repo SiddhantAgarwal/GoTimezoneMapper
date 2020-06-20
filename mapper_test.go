@@ -21,7 +21,7 @@ func TestFindCountryCodeForTimezone(t *testing.T) {
 		{
 			name:          "Should return error",
 			inputTimeone:  "random",
-			expectedError: "Country-Code not found for random",
+			expectedError: "[GoTimeZoneMapper.FindCountryCodeForTimezone] Country-Code not found for random",
 		},
 	}
 
