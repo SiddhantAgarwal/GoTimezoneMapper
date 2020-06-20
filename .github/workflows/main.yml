@@ -22,8 +22,6 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Code Coverage
-      run: go test -cover
-    - uses: paambaati/codeclimate-action@v2.2.4
       env:
         CC_TEST_REPORTER_ID: c3b23c5899d48eac138b8aa938828ef18e6cabd6fdfc584c7680a9b9a9d0bf18
       with:
